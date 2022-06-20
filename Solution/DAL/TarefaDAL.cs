@@ -17,9 +17,9 @@ namespace DAL
                 cmd.Connection = cn;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "Sp_InserirTarefa";
-
+                
                 SqlParameter pid = new SqlParameter("@Id", SqlDbType.Int);
-                pid.Value = IncrementaID();
+                pid.Value = _tarefa.Id;
                 cmd.Parameters.Add(pid);
 
                 SqlParameter pid_Uduario = new SqlParameter("@Id_Usuario", SqlDbType.Int);
@@ -39,32 +39,13 @@ namespace DAL
 
                 return _tarefa;
             }
-            catch (SqlException ex)
+            catch(SqlException ex)
             {
                 throw new Exception("Servidor SQL Error: " + ex.Message);
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-            }
-            finally
-            {
-                cn.Close();
-            }
-        }
-
-        private int IncrementaID()
-        {
-            SqlConnection cn = new SqlConnection();
-            try
-            {
-                cn.ConnectionString = Conexao.StringDeConexao;
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = cn;
-                cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "SELECT ISNULL(MAX(ID), 0) + 1 FROM Tarefa";
-                cn.Open();
-                return (int)cmd.ExecuteScalar();
             }
             finally
             {
