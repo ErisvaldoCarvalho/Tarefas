@@ -30,58 +30,26 @@ namespace UITarefa
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.Label idLabel;
             System.Windows.Forms.Label descricaoLabel;
             System.Windows.Forms.Label estatusLabel;
-            this.idTextBox = new System.Windows.Forms.TextBox();
             this.tarefaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.descricaoTextBox = new System.Windows.Forms.TextBox();
             this.estatusTextBox = new System.Windows.Forms.TextBox();
             this.buttonSalvar = new System.Windows.Forms.Button();
             this.buttonCancelar = new System.Windows.Forms.Button();
-            idLabel = new System.Windows.Forms.Label();
             descricaoLabel = new System.Windows.Forms.Label();
             estatusLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.tarefaBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
-            // idLabel
-            // 
-            idLabel.AutoSize = true;
-            idLabel.Location = new System.Drawing.Point(12, 9);
-            idLabel.Name = "idLabel";
-            idLabel.Size = new System.Drawing.Size(19, 17);
-            idLabel.TabIndex = 1;
-            idLabel.Text = "Id";
-            // 
-            // idTextBox
-            // 
-            this.idTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.tarefaBindingSource, "Id", true));
-            this.idTextBox.Location = new System.Drawing.Point(15, 29);
-            this.idTextBox.Name = "idTextBox";
-            this.idTextBox.Size = new System.Drawing.Size(100, 22);
-            this.idTextBox.TabIndex = 2;
-            // 
-            // tarefaBindingSource
-            // 
-            this.tarefaBindingSource.DataSource = typeof(Model.Tarefa);
-            // 
             // descricaoLabel
             // 
             descricaoLabel.AutoSize = true;
-            descricaoLabel.Location = new System.Drawing.Point(118, 9);
+            descricaoLabel.Location = new System.Drawing.Point(12, 9);
             descricaoLabel.Name = "descricaoLabel";
             descricaoLabel.Size = new System.Drawing.Size(71, 17);
             descricaoLabel.TabIndex = 3;
             descricaoLabel.Text = "Descrição";
-            // 
-            // descricaoTextBox
-            // 
-            this.descricaoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.tarefaBindingSource, "Descricao", true));
-            this.descricaoTextBox.Location = new System.Drawing.Point(121, 29);
-            this.descricaoTextBox.Name = "descricaoTextBox";
-            this.descricaoTextBox.Size = new System.Drawing.Size(535, 22);
-            this.descricaoTextBox.TabIndex = 4;
             // 
             // estatusLabel
             // 
@@ -91,6 +59,18 @@ namespace UITarefa
             estatusLabel.Size = new System.Drawing.Size(55, 17);
             estatusLabel.TabIndex = 5;
             estatusLabel.Text = "Estatus";
+            // 
+            // tarefaBindingSource
+            // 
+            this.tarefaBindingSource.DataSource = typeof(Model.Tarefa);
+            // 
+            // descricaoTextBox
+            // 
+            this.descricaoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.tarefaBindingSource, "Descricao", true));
+            this.descricaoTextBox.Location = new System.Drawing.Point(12, 29);
+            this.descricaoTextBox.Name = "descricaoTextBox";
+            this.descricaoTextBox.Size = new System.Drawing.Size(644, 22);
+            this.descricaoTextBox.TabIndex = 4;
             // 
             // estatusTextBox
             // 
@@ -131,8 +111,6 @@ namespace UITarefa
             this.Controls.Add(this.estatusTextBox);
             this.Controls.Add(descricaoLabel);
             this.Controls.Add(this.descricaoTextBox);
-            this.Controls.Add(idLabel);
-            this.Controls.Add(this.idTextBox);
             this.Name = "FormCadastrarTarefa";
             this.Text = "Cadastro de tarefas";
             ((System.ComponentModel.ISupportInitialize)(this.tarefaBindingSource)).EndInit();
@@ -144,7 +122,6 @@ namespace UITarefa
         #endregion
 
         private System.Windows.Forms.BindingSource tarefaBindingSource;
-        private System.Windows.Forms.TextBox idTextBox;
         private System.Windows.Forms.TextBox descricaoTextBox;
         private System.Windows.Forms.TextBox estatusTextBox;
         private System.Windows.Forms.Button buttonSalvar;

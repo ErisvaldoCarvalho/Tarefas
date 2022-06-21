@@ -18,7 +18,6 @@ namespace UITarefa
             {
                 TarefaBLL tarefaBLL = new TarefaBLL();
                 Tarefa tarefa = new Tarefa();
-                tarefa.Id = Convert.ToInt32(idTextBox.Text);
                 tarefa.Descricao = descricaoTextBox.Text;
                 tarefa.Estatus = estatusTextBox.Text;
                 tarefa.Id_Usuario = 1;
