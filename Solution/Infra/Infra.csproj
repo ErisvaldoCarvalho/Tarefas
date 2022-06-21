@@ -42,8 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Arquivo.cs" />
-    <Compile Include="asdf.cs" />
-    <Compile Include="asdf2.cs" />
     <Compile Include="Constante.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

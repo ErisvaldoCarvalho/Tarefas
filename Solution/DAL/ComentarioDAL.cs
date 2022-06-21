@@ -19,11 +19,13 @@ namespace DAL
                 cmd.CommandText = "Sp_InserirComentario";
 
                 SqlParameter pid = new SqlParameter("@Id", SqlDbType.Int);
-                pid.Value = _comentario.Id;
+                pid.Value = IncrementaID();
                 cmd.Parameters.Add(pid);
 
-                SqlParameter pid_Uduario = new SqlParameter("@Id_Usuario", SqlDbType.Int);
-                pid_Uduario.Value = _comentario.Id_Usuario;
+                SqlParameter pid_Uduario = new SqlParameter("@Id_Usuario", SqlDbType.Int)
+                {
+                    Value = _comentario.Id_Usuario
+                };
                 cmd.Parameters.Add(pid_Uduario);
 
                 SqlParameter pid_Tarefa = new SqlParameter("@Id_Tarefa", SqlDbType.Int);
@@ -53,6 +55,24 @@ namespace DAL
             }
         }
 
+        private int IncrementaID()
+        {
+            SqlConnection cn = new SqlConnection();
+            try
+            {
+                cn.ConnectionString = Conexao.StringDeConexao;
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = cn;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = "SELECT ISNULL(MAX(ID), 0) + 1 FROM Comentario";
+                cn.Open();
+                return (int)cmd.ExecuteScalar();
+            }
+            finally
+            {
+                cn.Close();
+            }
+        }
         public DataTable Buscar(int _id_Tarefa)
         {
             SqlDataAdapter da = new SqlDataAdapter();

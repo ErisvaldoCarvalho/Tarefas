@@ -28,7 +28,6 @@ namespace UITarefa
             {
                 ComentarioBLL comentarioBLL = new ComentarioBLL();
                 Comentario comentario = new Comentario();
-                comentario.Id = Convert.ToInt32(idTextBox.Text);
                 comentario.Descricao = descricaoTextBox.Text;
                 comentario.Id_Tarefa = id_Tarefa;
                 comentario.Id_Usuario = id_Usuario;
