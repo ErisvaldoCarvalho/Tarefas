@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Arquivo.cs" />
     <Compile Include="Constante.cs" />
+    <Compile Include="Criptografia.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
