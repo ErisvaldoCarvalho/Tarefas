@@ -41,8 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base.cs" />
     <Compile Include="ComentarioDAL.cs" />
     <Compile Include="Conexao.cs" />
+    <Compile Include="IBase.cs" />
+    <Compile Include="OpcoesBase.cs" />
     <Compile Include="TarefaDAL.cs" />
     <Compile Include="UsuarioDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
