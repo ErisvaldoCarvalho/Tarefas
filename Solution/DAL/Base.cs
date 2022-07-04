@@ -7,7 +7,7 @@ namespace DAL
 {
     public class Base : IBase
     {
-        public string Key
+        public int Key
         {
             get
             {
@@ -15,13 +15,13 @@ namespace DAL
                 {
                     OpcoesBase opcoesBase = (OpcoesBase)item.GetCustomAttribute(typeof(OpcoesBase));
                     if (opcoesBase != null && opcoesBase.ChavePrimaria)
-                        return Convert.ToString(item.GetValue(this));
+                        return Convert.ToInt32(item.GetValue(this));
                 }
-                return null;
+                return 0;
             }
         }
 
-        public void Inserir()
+        public virtual void Inserir()
         {
             using (SqlConnection sqlConnection = new SqlConnection(Conexao.StringDeConexao))
             {
@@ -43,7 +43,7 @@ namespace DAL
                 sqlCommand.ExecuteNonQuery();
             }
         }
-        public void Atualizar()
+        public virtual void Atualizar()
         {
             using (SqlConnection sqlConnection = new SqlConnection(Conexao.StringDeConexao))
             {
@@ -67,7 +67,7 @@ namespace DAL
             }
         }
 
-        public void Excluir()
+        public virtual void Excluir()
         {
             using (SqlConnection sqlConnection = new SqlConnection(Conexao.StringDeConexao))
             {
@@ -85,7 +85,7 @@ namespace DAL
                 sqlCommand.ExecuteNonQuery();
             }
         }
-        public List<IBase> Todos()
+        public virtual List<IBase> Todos()
         {
             var retorno = new List<IBase>();
             using (SqlConnection sqlConnection = new SqlConnection(Conexao.StringDeConexao))
@@ -103,7 +103,7 @@ namespace DAL
             }
             return retorno;
         }
-        public List<IBase> Buscar()
+        public virtual List<IBase> Buscar()
         {
             var retorno = new List<IBase>();
             using (SqlConnection sqlConnection = new SqlConnection(Conexao.StringDeConexao))
@@ -118,11 +118,12 @@ namespace DAL
                     {
                         if (opcoesBase.ChavePrimaria)
                             chavePrimaria = item.Name;
+
                         if (opcoesBase.UsarParaBuscar)
                         {
                             var valor = item.GetValue(this);
-                            if (valor != null)
-                                where.Add(item.Name + " = " + valor + "'");
+                            if (valor != null && !(!opcoesBase.UsarParaBuscarMesmoZerado || opcoesBase.ChavePrimaria && (int)valor == 0))
+                                where.Add(item.Name + " = '" + valor + "'");
                         }
                     }
                 }
@@ -151,11 +152,14 @@ namespace DAL
             {
                 OpcoesBase opcoesBase = (OpcoesBase)item.GetCustomAttribute(typeof(OpcoesBase));
                 if (opcoesBase != null && opcoesBase.UsarNoBancoDeDados)
-                    item.SetValue(_obj, _sqlDataReader[item.Name].ToString());
+                    if (item.PropertyType.Name == "Int32")
+                        item.SetValue(_obj, _sqlDataReader[item.Name]);
+                    else
+                        item.SetValue(_obj, _sqlDataReader[item.Name].ToString());
             }
         }
 
-        public bool Existe()
+        public virtual bool Existe()
         {
             bool retorno = false;
             using (SqlConnection sqlConnection = new SqlConnection(Conexao.StringDeConexao))
@@ -196,6 +200,11 @@ namespace DAL
                 }
             }
             return retorno;
+        }
+
+        public virtual void CriarTabela()
+        {
+            throw new NotImplementedException();
         }
     }
 }

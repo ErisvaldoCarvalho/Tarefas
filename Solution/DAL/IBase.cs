@@ -8,11 +8,12 @@ namespace DAL
 {
     public interface IBase
     {
-        string Key { get; }
+        int Key { get; }
         void Inserir();
         void Atualizar();
         void Excluir();
         bool Existe();
+        void CriarTabela();
         List<IBase> Todos();
         List<IBase> Buscar();
     }
